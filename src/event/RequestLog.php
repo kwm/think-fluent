@@ -60,7 +60,7 @@ class RequestLog
      * @param Response $response
      * @return string|array
      */
-    protected function getResponseBody(Response $response)
+    protected function getResponseBody($response)
     {
         return $response->getContent();
     }
