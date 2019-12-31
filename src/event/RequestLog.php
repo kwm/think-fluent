@@ -11,7 +11,7 @@ class RequestLog
     {
         /** @var \think\App $app */
         $app = Container::getInstance();
-        $app->log->log('request', [
+        $app->log->record([
             'url'       => $app->request->url(true),
             'method'    => $_SERVER['REQUEST_METHOD'] ?? '',
             'code'      => $response->getCode(),
@@ -32,7 +32,7 @@ class RequestLog
                 'header' => $response->getHeader(),
                 'body'   => $this->getResponseBody($response),
             ],
-        ]);
+        ], 'request');
     }
 
     /**
