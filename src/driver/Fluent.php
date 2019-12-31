@@ -190,7 +190,7 @@ class Fluent implements LogHandlerInterface
     protected function pack($tag, $data, $time = 0, $glue = '')
     {
         $time = $time ?: time();
-        if (!isset($data[0])) {
+        if (empty($data[0]) || is_string($data[0])) {
             $data['requestId'] = $this->requestId;
 
             return json_encode([$tag, $time, $data]);
@@ -222,7 +222,7 @@ class Fluent implements LogHandlerInterface
         try {
             !is_dir($path) && mkdir($path, 0755, true);
             $this->destination = $destination;
-        } catch (\Exception $e) {
+        } catch (Exception $e) {
             return false;
         }
 
