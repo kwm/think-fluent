@@ -35,6 +35,8 @@ class Fluent implements LogHandlerInterface
         'limit'      => 10240,
         //请求ID，可定义为
         'requestId'  => '',
+        //序列化方法
+        'serialize'  => 'json_encode',
     ];
 
     /** @var resource */
@@ -193,13 +195,13 @@ class Fluent implements LogHandlerInterface
         if (empty($data[0]) || is_string($data[0])) {
             $data['requestId'] = $this->requestId;
 
-            return json_encode([$tag, $time, $data]);
+            return $this->config['serialize']([$tag, $time, $data]);
         } else {
             $packed = [];
             foreach ($data AS $idx => $item) {
                 $item['requestId']  = $this->requestId;
                 $item['requestIdx'] = $idx + 1;
-                $packed[]           = json_encode([$tag, $time, $item]);
+                $packed[]           = $this->config['serialize']([$tag, $time, $item]);
             }
 
             return implode($glue, $packed);
