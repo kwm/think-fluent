@@ -26,7 +26,7 @@ class Fluent implements LogHandlerInterface
         //重试时的等待时间，单位：微秒，1000 = 0.001秒
         'retryWait'  => 1000,
         //标签前缀，系统会把没有.分隔的标签统一加上此前缀
-        'prefix'     => '',
+        'prefix'     => 'debug.',
         //写入失败后是否保存到文件
         'saveFile'   => true,
         //保存到文件的路径
